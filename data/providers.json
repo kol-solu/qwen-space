@@ -1,0 +1,1 @@
+[{"id": "ollama", "name": "Ollama (local)", "baseUrl": "http://localhost:11434/v1", "apiKey": "ollama", "model": "qwen2.5:7b"}, {"id": "openai", "name": "OpenAI", "baseUrl": "https://api.openai.com/v1", "apiKey": "", "model": "gpt-4o-mini"}, {"id": "c77428f5", "name": "MockLLM", "baseUrl": "http://localhost:8901/v1", "apiKey": "", "model": "mock-model-a"}]
