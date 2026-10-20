@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Qwen Space</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💬</text></svg>">
+<link rel="stylesheet" href="/static/style.css">
+<script defer src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/dompurify@3.1.5/dist/purify.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/core.min.js"></script>
+</head>
+<body>
+<div id="app">
+  <!-- Sidebar -->
+  <aside id="sidebar">
+    <div class="sb-head">
+      <div class="logo"><span class="logo-mark">Q</span><span>Qwen Space</span></div>
+      <button id="btn-close-sb" class="icon-btn" title="Close sidebar">✕</button>
+    </div>
+    <button id="btn-new-chat" class="new-chat-btn">＋ New Chat</button>
+    <nav id="conv-list" class="conv-list"></nav>
+    <div class="sb-foot">
+      <button id="btn-settings" class="foot-btn">⚙️ Settings</button>
+      <button id="btn-theme" class="foot-btn">🌓 Theme</button>
+    </div>
+  </aside>
+  <div id="sb-overlay"></div>
+
+  <!-- Main -->
+  <main id="main">
+    <header id="topbar">
+      <button id="btn-open-sb" class="icon-btn" title="Menu">☰</button>
+      <select id="sel-provider" title="Provider"></select>
+      <select id="sel-model" title="Model"></select>
+      <button id="btn-refresh-models" class="icon-btn" title="Reload model list">⟳</button>
+    </header>
+
+    <section id="chat-area">
+      <div id="welcome" class="hidden-none">
+        <div class="welcome-logo">Q</div>
+        <h1>Qwen Space</h1>
+        <p>Your self-hosted AI chat workspace.<br>Pick a provider above, then ask anything.</p>
+        <div class="suggestions">
+          <button class="sg">✍️ Help me write a professional email</button>
+          <button class="sg">🧠 Explain quantization in LLMs simply</button>
+          <button class="sg">💻 Write a Python script to rename files in bulk</button>
+          <button class="sg">🌍 Plan a 3-day trip to Kyoto</button>
+        </div>
+      </div>
+      <div id="messages"></div>
+    </section>
+
+    <footer id="composer-wrap">
+      <div id="composer">
+        <textarea id="input" rows="1" placeholder="Message… (Enter to send, Shift+Enter for newline)"></textarea>
+        <button id="btn-send" title="Send">➤</button>
+        <button id="btn-stop" class="hidden" title="Stop generating">■</button>
+      </div>
+      <div class="disclaimer">Qwen Space · runs with your own local or cloud OpenAI-compatible models</div>
+    </footer>
+  </main>
+</div>
+
+<!-- Settings modal -->
+<div id="modal-backdrop" class="hidden">
+  <div id="modal">
+    <div class="modal-head">
+      <h2>Settings</h2>
+      <button id="btn-modal-close" class="icon-btn">✕</button>
+    </div>
+    <div class="modal-body">
+      <h3>Providers (OpenAI-compatible endpoints)</h3>
+      <div id="provider-list"></div>
+      <div class="prov-form">
+        <input id="pf-name" placeholder="Name (e.g. LM Studio)">
+        <input id="pf-url" placeholder="Base URL (e.g. http://localhost:1234/v1)">
+        <input id="pf-key" placeholder="API key (optional for local servers)" type="password">
+        <input id="pf-model" placeholder="Default model (e.g. qwen2.5:7b)">
+        <div class="pf-actions">
+          <button id="pf-save">Add / Update</button>
+          <span id="pf-status"></span>
+        </div>
+      </div>
+      <h3>Generation</h3>
+      <label class="row-label">Temperature: <span id="temp-val">0.7</span>
+        <input id="inp-temp" type="range" min="0" max="2" step="0.1" value="0.7">
+      </label>
+      <label class="row-label">System prompt
+        <textarea id="inp-system" rows="2">You are a helpful assistant.</textarea>
+      </label>
+    </div>
+  </div>
+</div>
+
+<script src="/static/app.js" defer></script>
+</body>
+</html>
